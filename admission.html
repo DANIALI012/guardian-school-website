@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Admissions | Guardian Model School & College</title>
+
+<style>
+:root {
+  --navy: #102447;
+  --navy-light: #193b68;
+  --gold: #d4af37;
+  --gold-light: #fff5d5;
+  --white: #ffffff;
+  --bg: #f3f6fb;
+  --text: #273449;
+  --muted: #68758a;
+  --border: #dce3ed;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.topbar {
+  background: #0a1930;
+  color: #e9d99f;
+  text-align: center;
+  padding: 9px 15px;
+  font-size: 13px;
+  letter-spacing: .4px;
+}
+
+header {
+  background: linear-gradient(135deg, #102447, #1b416f);
+  color: white;
+  padding: 25px 20px;
+  text-align: center;
+  border-bottom: 5px solid var(--gold);
+}
+
+.logo {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  background: white;
+  padding: 5px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+}
+
+header h1 {
+  font-size: clamp(23px, 4vw, 34px);
+  margin: 12px 0 4px;
+  line-height: 1.25;
+}
+
+header p { margin: 4px 0; }
+
+.affiliation {
+  color: #f0d77f;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+nav {
+  background: white;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 3px 12px #10244712;
+}
+
+nav a {
+  color: var(--navy);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav a:hover { color: #a17a00; }
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 58px 20px 65px;
+  color: white;
+  background:
+    radial-gradient(circle at 15% 20%, #ffffff13 0 2px, transparent 3px),
+    radial-gradient(circle at 85% 70%, #ffffff13 0 3px, transparent 4px),
+    linear-gradient(135deg, #102447, #1c4778);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border: 1px solid #d4af3740;
+  border-radius: 50%;
+  right: -100px;
+  top: -120px;
+  pointer-events: none;
+}
+
+.hero-label {
+  display: inline-block;
+  color: #f8df8a;
+  border: 1px solid #d4af3780;
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  margin-bottom: 15px;
+}
+
+.hero h2 {
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.2;
+  max-width: 760px;
+  margin: 0 auto 15px;
+}
+
+.hero h2 span { color: #f2d36e; }
+
+.hero p {
+  max-width: 650px;
+  margin: 0 auto 24px;
+  color: #e2e9f4;
+  font-size: 16px;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 13px 25px;
+  border-radius: 7px;
+  background: var(--gold);
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 5px 18px #00000020;
+}
+
+.hero-button:hover { background: #f0cf61; }
+
+.container {
+  width: min(920px, calc(100% - 30px));
+  margin: -25px auto 45px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px #10244712;
+  overflow: hidden;
+}
+
+.form-heading {
+  text-align: center;
+  padding: 30px 22px 25px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.form-heading .eyebrow {
+  color: #9b7711;
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.form-heading h2 {
+  color: var(--navy);
+  font-size: clamp(24px, 4vw, 32px);
+  margin: 7px 0;
+}
+
+.form-heading p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 24px 28px 8px;
+  padding: 16px;
+  background: var(--gold-light);
+  border: 1px solid #f0df9d;
+  border-radius: 9px;
+}
+
+.notice-icon {
+  font-size: 23px;
+  line-height: 1.2;
+}
+
+.notice strong { color: var(--navy); }
+
+.notice p {
+  margin: 3px 0 0;
+  font-size: 13px;
+  color: #665729;
+}
+
+form { padding: 20px 28px 30px; }
+
+.form-section {
+  margin-top: 12px;
+  padding-top: 10px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 20px;
+}
+
+.section-number {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: var(--navy);
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.section-title h3 {
+  color: var(--navy);
+  margin: 0;
+  font-size: 18px;
+}
+
+.section-title p {
+  margin: 1px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.full { grid-column: 1 / -1; }
+
+label {
+  font-weight: bold;
+  font-size: 13px;
+  color: #263750;
+  margin-bottom: 7px;
+}
+
+input, select, textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fbfcfe;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #b18a19;
+  background: white;
+  box-shadow: 0 0 0 3px #d4af3725;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input::placeholder, textarea::placeholder { color: #9aa5b5; }
+
+.required-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 22px 0 10px;
+}
+
+.submit-button {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 8px;
+  background: linear-gradient(100deg, #d4af37, #f0d777);
+  color: #102447;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 14px #d4af3730;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px #d4af3745;
+}
+
+.privacy-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  margin: 14px 0 0;
+}
+
+.contact-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.contact-item {
+  background: white;
+  border: 1px solid #e6ebf2;
+  border-radius: 11px;
+  padding: 18px;
+  text-align: center;
+}
+
+.contact-item strong {
+  display: block;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.contact-item a {
+  color: #876500;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+footer {
+  background: #0a1930;
+  color: white;
+  text-align: center;
+  padding: 28px 16px;
+  border-top: 4px solid var(--gold);
+}
+
+footer p { margin: 5px 0; }
+
+.footer-affiliation {
+  color: #f0d77f;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  header { padding: 22px 14px; }
+  .logo { width: 75px; height: 75px; }
+  .hero { padding: 48px 18px 58px; }
+  .container { width: calc(100% - 20px); }
+  .form-heading { padding: 25px 16px 20px; }
+  .notice { margin: 18px 15px 5px; }
+  form { padding: 16px 17px 23px; }
+  .form-grid { grid-template-columns: 1fr; gap: 16px; }
+  .full { grid-column: auto; }
+  .contact-strip { grid-template-columns: 1fr; }
+  .section-title h3 { font-size: 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  QUALITY EDUCATION • STRONG VALUES • BRIGHT FUTURE
+</div>
+
+<header>
+  <img class="logo" src="logo.png" alt="Guardian School Logo">
+  <h1>Guardian Model School &amp; College</h1>
+  <p>Koral, Islamabad | Bhatta Road</p>
+  <p class="affiliation">Affiliated With FBISE | Registered With PEIRA</p>
+</header>
+
+<nav>
+  <a href="index.html">← Back to School Website</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-label">ADMISSIONS OPEN</div>
+  <h2>Give Your Child a <span>Brighter Future</span></h2>
+  <p>
+    Join the Guardian family, where quality education, character building,
+    and student development come together.
+  </p>
+  <a href="#application-form" class="hero-button">Start Your Application ↓</a>
+</section>
+
+<main class="container" id="application-form">
+  <div class="form-card">
+
+    <div class="form-heading">
+      <div class="eyebrow">Your Journey Starts Here</div>
+      <h2>Online Admission Form</h2>
+      <p>Please provide the details below. Our school team will review your inquiry.</p>
+    </div>
+
+    <div class="notice">
+      <div class="notice-icon">✦</div>
+      <div>
+        <strong>Admissions Open — Play Group to Intermediate</strong>
+        <p>Submitting this form is an admission inquiry. Admission is confirmed only by the school administration.</p>
+      </div>
+    </div>
+
+    <form action="https://formsubmit.co/danishhaider012@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Online Admission Application - Guardian School">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="true">
+
+      <div class="form-section">
+        <div class="section-title">
+          <div class="section-number">01</div>
+          <div>
+            <h3>Student Information</h3>
+            <p>Enter the student's basic details.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="student">Student's Full Name *</label>
+            <input id="student" name="Student Name" autocomplete="name" required>
+          </div>
+
+          <div class="field">
+            <label for="dob">Date of Birth *</label>
+            <input id="dob" type="date" name="Date of Birth" required>
+          </div>
+
+          <div class="field">
+            <label for="gender">Gender *</label>
+            <select id="gender" name="Gender" required>
+              <option value="">Select gender</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="class">Applying for Class *</label>
+            <select id="class" name="Applying for Class" required>
+              <option value="">Select class</option>
+              <option>Play Group</option>
+              <option>Nursery</option>
+              <option>Prep</option>
+              <option>Class 1</option>
+              <option>Class 2</option>
+              <option>Class 3</option>
+              <option>Class 4</option>
+              <option>Class 5</option>
+              <option>Class 6</option>
+              <option>Class 7</option>
+              <option>Class 8</option>
+              <option>Class 9</option>
+              <option>Class 10</option>
+              <option>Intermediate</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="campus">Preferred Campus *</label>
+            <select id="campus" name="Preferred Campus" required>
+              <option value="">Select campus</option>
+              <option>Main Campus</option>
+              <option>Gulberg Campus</option>
+              <option>Maryam Campus</option>
+              <option>Barkat Campus</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="previous">Previous School</label>
+            <input id="previous" name="Previous School" placeholder="Enter previous school name, if applicable">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-title">
+          <div class="section-number">02</div>
+          <div>
+            <h3>Parent / Guardian Information</h3>
+            <p>Provide contact details for follow-up.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="parent">Parent / Guardian Name *</label>
+            <input id="parent" name="Parent Guardian Name" autocomplete="name" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">Mobile Number *</label>
+            <input id="phone" type="tel" name="Mobile Number"
+                   autocomplete="tel" placeholder="03XX-XXXXXXX" required>
+          </div>
+
+          <div class="field full">
+            <label for="email">Parent's Email Address</label>
+            <input id="email" type="email" name="Parent Email"
+                   autocomplete="email" placeholder="example@email.com">
+          </div>
+
+          <div class="field full">
+            <label for="address">Home Address *</label>
+            <textarea id="address" name="Home Address"
+                      autocomplete="street-address"
+                      placeholder="Enter your complete home address" required></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-title">
+          <div class="section-number">03</div>
+          <div>
+            <h3>Additional Information</h3>
+            <p>Share any questions or details with us.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="field full">
+            <label for="message">Message (Optional)</label>
+            <textarea id="message" name="Additional Information"
+                      placeholder="Write any questions or additional details here..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <p class="required-note">* Required fields. Please check all details before submitting.</p>
+      <button class="submit-button" type="submit">Submit Admission Inquiry &nbsp; →</button>
+      <p class="privacy-note">Your information will be sent to the school admission contact for follow-up.</p>
+    </form>
+  </div>
+
+  <div class="contact-strip">
+    <div class="contact-item">
+      <strong>Call the School</strong>
+      <a href="tel:+923005341392">0300-5341392</a>
+    </div>
+    <div class="contact-item">
+      <strong>Email Us</strong>
+      <a href="mailto:guardianmodelschoolsystem@gmail.com">guardianmodelschoolsystem@gmail.com</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p><strong>Guardian Model School &amp; College</strong></p>
+  <p>Koral, Islamabad | Bhatta Road</p>
+  <p class="footer-affiliation">Affiliated With FBISE | Registered With PEIRA</p>
+  <p>© 2026 Guardian Model School &amp; College. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+```
